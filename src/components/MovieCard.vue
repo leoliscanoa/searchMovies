@@ -53,22 +53,22 @@
 </template>
 <script>
 export default {
-  name   : 'MovieCard',
-  props  : {
+  name: 'MovieCard',
+  props: {
     movie: {
-      type   : Object,
+      type: Object,
       default: () => {
         return {
           Poster: '',
-          Title : '',
-          Type  : '',
-          Year  : '',
+          Title: '',
+          Type: '',
+          Year: '',
           imdbID: ''
         }
       }
     }
   },
-  data   : () => ({
+  data: () => ({
     value: ''
   }),
   methods: {

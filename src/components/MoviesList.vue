@@ -18,15 +18,15 @@
   </v-container>
 </template>
 <script>
-import MovieCard                                from '@/components/MovieCard'
+import MovieCard from '@/components/MovieCard'
 import { mapGetters, mapMutations, mapActions } from 'vuex'
 
 export default {
-  name      : 'MovieList',
+  name: 'MovieList',
   components: {
     MovieCard
   },
-  computed  : {
+  computed: {
     ...mapGetters(['getMovies', 'getPage', 'getTotal', 'getPages', 'getSearch']),
     movies () {
       return this.getMovies
@@ -41,14 +41,14 @@ export default {
       return this.getSearch
     }
   },
-  methods   : {
+  methods: {
     ...mapActions(['getMoviesBySearchByPage']),
     ...mapMutations(['setPages', 'setPage']),
     currentPage (page) {
       this.setPage(page)
       const find = {
         search: this.searchT,
-        page  : this.page
+        page: this.page
       }
       this.getMoviesBySearchByPage(find)
     }

@@ -61,9 +61,9 @@ import { mapActions, mapGetters, mapMutations } from 'vuex'
 export default {
   name: 'Search',
 
-  data    : () => ({
+  data: () => ({
     search: '',
-    items : [
+    items: [
       'movie',
       'series',
       'episode'
@@ -84,7 +84,7 @@ export default {
       return this.getType
     }
   },
-  methods : {
+  methods: {
     ...mapActions(['getMoviesBySearchByPage']),
     ...mapMutations(['setMovies', 'setSearch', 'setPage', 'setPages', 'setTotal', 'setType', 'setNoResults']),
     clearMessage () {
@@ -98,8 +98,8 @@ export default {
     searchMovies (search) {
       const find = {
         search: search,
-        page  : this.page,
-        type  : this.type
+        page: this.page,
+        type: this.type
       }
       this.getMoviesBySearchByPage(find)
     },
