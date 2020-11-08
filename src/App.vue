@@ -6,11 +6,9 @@
       dark
     >
       <p class="text-h5 mt-2">Movies Finder</p>
-
       <v-spacer></v-spacer>
-
       <v-btn
-        href="https://github.com/andresliscanoa?tab=repositories"
+        href="https://github.com/andresliscanoa/searchMovies"
         target="_blank"
         text
       >
@@ -18,34 +16,40 @@
         <v-icon>mdi-github</v-icon>
       </v-btn>
     </v-app-bar>
-
     <v-main>
-      <Search/>
-      <movies-list v-show="getMovies.length > 0"/>
+      <router-view></router-view>
     </v-main>
+    <v-footer absolute app>
+      <v-spacer/>
+      <span>API powered By <strong><a href="https://omdbapi.com/" target="_blank">omdbapi</a></strong></span>
+    </v-footer>
   </v-app>
 </template>
-
 <script>
-import Search         from './components/Search'
-import MoviesList     from '@/components/MoviesList'
-import { mapGetters } from 'vuex'
-
 export default {
   name: 'App',
-
-  components: {
-    Search,
-    MoviesList
-  },
-  data      : () => ({
+  data: () => ({
     //
-  }),
-  computed  : {
-    ...mapGetters(['getMovies']),
-    movies () {
-      return this.getMovies
-    }
-  }
+  })
 }
 </script>
+<style>
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: black;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: purple;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: mediumpurple;
+}
+</style>

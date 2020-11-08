@@ -5,14 +5,24 @@
         <v-card dark elevation="5" max-height="28em">
           <v-tooltip bottom>
             <template v-slot:activator="{ on }">
-              <v-btn v-on="on" absolute color="orange" dark fab right small top>
+              <v-btn
+                v-on="on"
+                absolute
+                color="orange"
+                dark
+                fab
+                right
+                small
+                top
+                @click.native="currentMovie(movie.imdbID)"
+              >
                 <v-icon>mdi-eye</v-icon>
               </v-btn>
             </template>
             <span>Watch more</span>
           </v-tooltip>
           <v-img
-            :src="movie.Poster"
+            :src="movie.Poster==='N/A' ? 'https://upload.wikimedia.org/wikipedia/commons/a/ac/No_image_available.svg' : movie.Poster"
             aspect-ratio="1.1"
             class="white--text align-end"
             contain
@@ -43,8 +53,8 @@
 </template>
 <script>
 export default {
-  name : 'MovieCard',
-  props: {
+  name   : 'MovieCard',
+  props  : {
     movie: {
       type   : Object,
       default: () => {
@@ -58,8 +68,13 @@ export default {
       }
     }
   },
-  data : () => ({
+  data   : () => ({
     value: ''
-  })
+  }),
+  methods: {
+    currentMovie (id) {
+      this.$router.push({ path: `/movie/${id}` })
+    }
+  }
 }
 </script>

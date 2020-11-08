@@ -1,12 +1,12 @@
 <template>
-  <v-container fluid>
-    <v-layout justify-center row wrap>
+  <v-container>
+    <v-layout justify-space-between row wrap>
       <v-flex md6 xs12>
         <v-card dark flat>
           <v-card-title>
             <v-app-bar color="transparent" dark flat>
               <v-toolbar-title>
-                Search a movie
+                Search a movie, serie or episode
               </v-toolbar-title>
               <v-spacer/>
             </v-app-bar>
@@ -20,11 +20,33 @@
               clearable
               color="yellow"
               filled
-              label="Type a movie title, or just a word"
+              label="Type a title or just a word"
               type="text"
               @click:append-outer="searchMovies(search)"
               @click:clear="clearMessage"
               @keyup.enter="searchMovies(search)"
+            />
+          </v-card-text>
+        </v-card>
+      </v-flex>
+      <v-flex md4 xs12>
+        <v-card dark flat>
+          <v-card-title>
+            <v-app-bar color="transparent" dark flat>
+              <v-toolbar-title>
+                Filters
+              </v-toolbar-title>
+              <v-spacer/>
+            </v-app-bar>
+          </v-card-title>
+          <v-card-text>
+            <v-select
+              v-model="type"
+              :items="items"
+              color="yellow"
+              item-color="yellow"
+              label="Type"
+              @change="currentType($event)"
             />
           </v-card-text>
         </v-card>
@@ -40,10 +62,15 @@ export default {
   name: 'Search',
 
   data    : () => ({
-    search: ''
+    search: '',
+    items : [
+      'movie',
+      'series',
+      'episode'
+    ]
   }),
   computed: {
-    ...mapGetters(['getLoad', 'getPage', 'getSearch']),
+    ...mapGetters(['getLoad', 'getPage', 'getSearch', 'getType']),
     loading () {
       return this.getLoad
     },
@@ -52,11 +79,14 @@ export default {
     },
     search () {
       return this.getSearch
+    },
+    type () {
+      return this.getType
     }
   },
   methods : {
     ...mapActions(['getMoviesBySearchByPage']),
-    ...mapMutations(['setMovies', 'setSearch', 'setPage', 'setPages', 'setTotal']),
+    ...mapMutations(['setMovies', 'setSearch', 'setPage', 'setPages', 'setTotal', 'setType', 'setNoResults']),
     clearMessage () {
       this.search = ''
       this.setMovies([])
@@ -68,9 +98,14 @@ export default {
     searchMovies (search) {
       const find = {
         search: search,
-        page  : this.page
+        page  : this.page,
+        type  : this.type
       }
       this.getMoviesBySearchByPage(find)
+    },
+    currentType (type) {
+      this.setType(type)
+      this.setNoResults(false)
     }
   }
 }
