@@ -1,32 +1,51 @@
 <template>
-  <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
-    <router-view/>
-  </div>
+  <v-app>
+    <v-app-bar
+      app
+      color="purple darken-4"
+      dark
+    >
+      <p class="text-h5 mt-2">Movies Finder</p>
+
+      <v-spacer></v-spacer>
+
+      <v-btn
+        href="https://github.com/andresliscanoa?tab=repositories"
+        target="_blank"
+        text
+      >
+        <span class="mr-2">andresliscanoa</span>
+        <v-icon>mdi-github</v-icon>
+      </v-btn>
+    </v-app-bar>
+
+    <v-main>
+      <Search/>
+      <movies-list v-show="getMovies.length > 0"/>
+    </v-main>
+  </v-app>
 </template>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
+<script>
+import Search         from './components/Search'
+import MoviesList     from '@/components/MoviesList'
+import { mapGetters } from 'vuex'
 
-#nav {
-  padding: 30px;
-}
+export default {
+  name: 'App',
 
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
+  components: {
+    Search,
+    MoviesList
+  },
+  data      : () => ({
+    //
+  }),
+  computed  : {
+    ...mapGetters(['getMovies']),
+    movies () {
+      return this.getMovies
+    }
+  }
 }
-
-#nav a.router-link-exact-active {
-  color: #42b983;
-}
-</style>
+</script>
