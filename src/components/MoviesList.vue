@@ -2,7 +2,7 @@
   <v-container fuild>
     <v-layout justify-start row wrap>
       <v-flex xs12>
-        <v-container class="text-center max-width">
+        <v-container class="text-center maxWidth">
           <v-pagination
             v-model="page"
             :length="pages"
@@ -12,7 +12,7 @@
         </v-container>
       </v-flex>
       <v-flex v-for="movie in movies" :key="movie.title" md3 px-1 xs12>
-        <movie-card :movie="movie"/>
+        <movie-card :movie="movie" class="pt-8"/>
       </v-flex>
     </v-layout>
   </v-container>
@@ -48,10 +48,15 @@ export default {
       this.setPage(page)
       const find = {
         search: this.searchT,
-        page: this.page
+        page  : this.page
       }
       this.getMoviesBySearchByPage(find)
     }
   }
 }
 </script>
+<style scoped>
+.maxWidth {
+  max-width: 100rem;
+}
+</style>

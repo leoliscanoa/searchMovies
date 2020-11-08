@@ -1,8 +1,8 @@
 <template>
   <v-container>
     <v-layout justify-center row wrap>
-      <v-flex xs12>
-        <v-card dark elevation="5" max-height="28em">
+      <v-flex pt-10 xs12>
+        <v-card dark elevation="5">
           <v-tooltip bottom>
             <template v-slot:activator="{ on }">
               <v-btn

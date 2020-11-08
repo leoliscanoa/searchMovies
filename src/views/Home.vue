@@ -3,7 +3,7 @@
     <v-flex xs12>
       <Search/>
       <no-results v-show="alert"/>
-      <movies-list v-show="getMovies.length > 0"/>
+      <movies-list v-show="getMovies.length > 0" class="mt-5"/>
     </v-flex>
   </v-layout>
 </template>
