@@ -1,0 +1,28 @@
+name: deploy-cicd
+on:
+  push:
+    paths-ignore:
+      - '**.md'
+      - '**.*ignore'
+    branches:
+      - master
+permissions:
+  contents: write
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+      - name: Use NodeJS 12.x
+        uses: actions/setup-node@v3
+        with:
+          node-version: '12.x'
+      - name: npm install
+        run: |
+          npm install --omit=dev
+          npm run build
+      - name: Deploy 🚀
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          folder: build
