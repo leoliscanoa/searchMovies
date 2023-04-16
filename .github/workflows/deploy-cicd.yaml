@@ -23,7 +23,7 @@ jobs:
           npm install --omit=dev
           npm run build
         env:
-          VUE_APP_APIKEY: ${ secrets.VUE_APP_APIKEY }
+          VUE_APP_APIKEY: ${{ secrets.VUE_APP_APIKEY }}
       - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@v4
         with:
