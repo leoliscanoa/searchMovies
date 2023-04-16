@@ -60,7 +60,6 @@ import { mapActions, mapGetters, mapMutations } from 'vuex'
 
 export default {
   name: 'Search',
-
   data: () => ({
     search: '',
     items: [
@@ -88,7 +87,6 @@ export default {
     ...mapActions(['getMoviesBySearchByPage']),
     ...mapMutations(['setMovies', 'setSearch', 'setPage', 'setPages', 'setTotal', 'setType', 'setNoResults']),
     clearMessage () {
-      this.search = ''
       this.setMovies([])
       this.setSearch('')
       this.setPage(1)
@@ -97,9 +95,9 @@ export default {
     },
     searchMovies (search) {
       const find = {
-        search: search,
+        search: this.search,
         page: this.page,
-        type: this.type
+        type: this.type || 'movie'
       }
       this.getMoviesBySearchByPage(find)
     },

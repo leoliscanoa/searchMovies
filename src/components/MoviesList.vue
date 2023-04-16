@@ -27,7 +27,7 @@ export default {
     MovieCard
   },
   computed: {
-    ...mapGetters(['getMovies', 'getPage', 'getTotal', 'getPages', 'getSearch']),
+    ...mapGetters(['getMovies', 'getPage', 'getTotal', 'getPages', 'getSearch', 'getType']),
     movies () {
       return this.getMovies
     },
@@ -48,7 +48,8 @@ export default {
       this.setPage(page)
       const find = {
         search: this.searchT,
-        page  : this.page
+        page  : this.page,
+        type: this.getType
       }
       this.getMoviesBySearchByPage(find)
     }
